@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegationBook", "DelegationBook\DelegationBook.csproj", "{F6FF9B9D-5ABE-4653-A40C-677E4A4FC945}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelegationBook", "DelegationBook\DelegationBook.csproj", "{F6FF9B9D-5ABE-4653-A40C-677E4A4FC945}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
