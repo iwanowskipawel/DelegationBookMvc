@@ -6,7 +6,7 @@ namespace DelegationBook.Models
     public class Project
     {
         [Key]
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
 
         [Display(Name = "Symbol")]
         public string Symbol { get; set; }

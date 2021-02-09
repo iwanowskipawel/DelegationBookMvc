@@ -5,7 +5,7 @@ namespace DelegationBook.Models
     public class Company
     {
         [Key]
-        public int Id { get; set; }
+        public int CompanyId { get; set; }
 
         [Display(Name = "Nazwa")]
         public string Name { get; set; }

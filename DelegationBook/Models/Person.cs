@@ -5,7 +5,7 @@ namespace DelegationBook.Models
     public abstract class Person
     {
         [Key]
-        public int Id { get; set; }
+        public int PersonId { get; set; }
 
         [Display(Name = "Imię")]
         public string FirstName { get; set; }

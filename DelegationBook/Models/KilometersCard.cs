@@ -7,7 +7,7 @@ namespace DelegationBook.Models
     public class KilometersCard
     {
         [Key]
-        public int Id { get; set; }
+        public int CardId { get; set; }
 
         [Display(Name = "Nr karty")]
         public string CardSymbol { get; set; }

@@ -6,7 +6,7 @@ namespace DelegationBook.Models
     public class Car
     {
         [Key]
-        public int Id { get; set; }
+        public int CarId { get; set; }
 
         [Display(Name = "Model")]
         public string Model { get; set; }

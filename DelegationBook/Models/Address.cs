@@ -5,7 +5,7 @@ namespace DelegationBook.Models
     public class Address
     {
         [Key]
-        public int Id { get; set; }
+        public int AddressId { get; set; }
 
         [Display(Name = "Ulica")]
         public string Street { get; set; }

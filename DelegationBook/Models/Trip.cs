@@ -9,7 +9,7 @@ namespace DelegationBook.Models
     public class Trip
     {
         [Key]
-        public int Id { get; set; }
+        public int TripId { get; set; }
 
         [Display(Name = "Data wyjazdu")]
         [DataType(DataType.Date)]
