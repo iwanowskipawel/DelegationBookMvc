@@ -54,7 +54,7 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DepartureDate,ArrivalDate,Destination,InitialMeter,FinalMeter")] Trip trip)
+        public async Task<IActionResult> Create([Bind("TripId,DepartureDate,ArrivalDate,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
             if (ModelState.IsValid)
             {
