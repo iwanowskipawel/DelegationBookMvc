@@ -87,7 +87,7 @@ namespace DelegationBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            int id, [Bind("Id,DepartureDate,ArrivalDate,Driver,Project,Keeper,Destination,InitialMeter,FinalMeter")] Trip trip)
+            int id, [Bind("TripId,DepartureDate,ArrivalDate,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
             if (id != trip.TripId)
             {
