@@ -2,7 +2,7 @@
 
 namespace DelegationBook.Models
 {
-    public class Person
+    public abstract class Person
     {
         [Key]
         public int Id { get; set; }
