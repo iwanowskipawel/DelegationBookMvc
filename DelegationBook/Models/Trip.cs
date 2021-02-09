@@ -13,12 +13,10 @@ namespace DelegationBook.Models
 
         [Display(Name = "Data wyjazdu")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0} r.")]
         public DateTime DepartureDate { get; set; }
 
         [Display(Name = "Data powrotu")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0} r.")]
         public DateTime ArrivalDate { get; set; }
 
         [Display(Name = "Kierowca")]

@@ -22,10 +22,19 @@
                 @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InitialMeter)
+                @Html.DisplayNameFor(model => model.Project)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FinalMeter)
+                @Html.DisplayNameFor(model => model.Keeper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KilometersCard.Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distance)
             </th>
             <th></th>
         </tr>
@@ -34,19 +43,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DepartureDate)
+                @Html.DisplayFor(itemModel => item.DepartureDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ArrivalDate)
+                @Html.DisplayFor(itemModel => item.ArrivalDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Destination)
+                @Html.DisplayFor(itemModel => item.Destination)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InitialMeter)
+                @Html.DisplayFor(itemModel => item.Project)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FinalMeter)
+                @Html.DisplayFor(itemModel => item.Keeper)
+            </td>
+            <td>
+                @Html.DisplayFor(itemModel => item.Driver)
+            </td>
+            <td>
+                @Html.DisplayFor(itemModel => item.KilometersCard.Car)
+            </td>
+            <td>
+                @Html.DisplayFor(itemModel => item.Distance)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
