@@ -5,7 +5,7 @@ namespace DelegationBook.Models
 {
     public class Driver : Employee
     {
-        [Key]
+        
         public int DriverId { get; set; }
 
         [Display(Name = "Użytkowane samochody")]
