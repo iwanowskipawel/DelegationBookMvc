@@ -34,7 +34,7 @@ namespace DelegationBook.Controllers
             }
 
             var trip = await _context.Trips
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.TripId == id);
             if (trip == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace DelegationBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DepartureDate,ArrivalDate,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
-            if (id != trip.Id)
+            if (id != trip.TripId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace DelegationBook.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TripExists(trip.Id))
+                    if (!TripExists(trip.TripId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace DelegationBook.Controllers
             }
 
             var trip = await _context.Trips
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.TripId == id);
             if (trip == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace DelegationBook.Controllers
 
         private bool TripExists(int id)
         {
-            return _context.Trips.Any(e => e.Id == id);
+            return _context.Trips.Any(e => e.TripId == id);
         }
     }
 }
