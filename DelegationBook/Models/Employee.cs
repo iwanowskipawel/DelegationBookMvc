@@ -5,7 +5,6 @@ namespace DelegationBook.Models
 {
     public class Employee : Person
     {
-        [Key]
         public int EmployeeId { get; set; }
 
         [Display(Name = "Wyjazdy")]
