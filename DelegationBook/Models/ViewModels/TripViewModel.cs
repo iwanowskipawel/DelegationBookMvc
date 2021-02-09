@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DelegationBook.Views.ViewModels
+namespace DelegationBook.Models.ViewModels
 {
     public class TripViewModel
     {
