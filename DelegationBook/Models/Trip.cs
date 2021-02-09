@@ -36,7 +36,7 @@ namespace DelegationBook.Models
         [Display(Name = "Początkowy stan licznika")]
         public int InitialMeter { get; set; }
 
-        [Display(Name = "Końcowy licznika")]
+        [Display(Name = "Końcowy stan licznika")]
         public int FinalMeter { get; set; }
 
         [Display(Name = "Dystans")]
