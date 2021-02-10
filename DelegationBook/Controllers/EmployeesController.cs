@@ -97,6 +97,7 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
+                    employee.IsDriver = true;
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }
