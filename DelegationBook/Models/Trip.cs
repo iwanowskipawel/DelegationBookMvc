@@ -20,7 +20,7 @@ namespace DelegationBook.Models
         public DateTime ArrivalDate { get; set; }
 
         [Display(Name = "Kierowca")]
-        public Employee Driver { get; set; }
+        public Driver Driver { get; set; }
 
         [Display(Name = "Temat")]
         public Project Project { get; set; }
