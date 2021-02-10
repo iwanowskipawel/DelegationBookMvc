@@ -52,16 +52,16 @@
                 @Html.DisplayFor(itemModel => item.Destination)
             </td>
             <td>
-                @Html.DisplayFor(itemModel => item.Project)
+                @Html.DisplayFor(itemModel => item.Project.Symbol)
             </td>
             <td>
-                @Html.DisplayFor(itemModel => item.Keeper)
+                @Html.DisplayFor(itemModel => item.Keeper.FullName)
             </td>
             <td>
-                @Html.DisplayFor(itemModel => item.Driver)
+                @Html.DisplayFor(itemModel => item.Driver.FullName)
             </td>
             <td>
-                @Html.DisplayFor(itemModel => item.KilometersCard.Car)
+                @Html.DisplayFor(itemModel => item.KilometersCard.Car.RegistrationNumber)
             </td>
             <td>
                 @Html.DisplayFor(itemModel => item.Distance)

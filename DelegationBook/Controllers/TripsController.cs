@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DelegationBook.Data;
 using DelegationBook.Models;
-using DelegationBook.Models.ViewModels;
 
 namespace DelegationBook.Controllers
 {
@@ -46,13 +45,16 @@ namespace DelegationBook.Controllers
         }
 
         // GET: Trips/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var employees = _context.Employees.OrderBy(e => e.EmployeeId).Select(e => e);
+            var employees = _context.Employees
+                .OrderBy(e => e.PersonId)
+                .Select(e => e)
+                .Distinct();
 
-            var tripViewModel = new TripViewModel { Employees = new SelectList(employees.Distinct().ToList()) };
+            ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.PersonId), nameof(Employee.FullName));
 
-            return View(tripViewModel);
+            return View();
         }
 
         // POST: Trips/Create
@@ -60,15 +62,17 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TripId,DepartureDate,ArrivalDate,Keeper,Destination,InitialMeter,FinalMeter")] Trip trip, Employee selectedEmployee)
+        public async Task<IActionResult> Create(
+            [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
             if (ModelState.IsValid)
             {
-                //trip.Keeper = selectedEmployee;
-                _context.Add(trip);
+                trip.Keeper = _context.Employees.First(e => e.PersonId == trip.Keeper.PersonId);
+                _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(trip);
         }
 
