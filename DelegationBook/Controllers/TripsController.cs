@@ -51,6 +51,7 @@ namespace DelegationBook.Controllers
                 .OrderBy(e => e.EmployeeId)
                 .Select(e => e)
                 .Distinct();
+           
 
             ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
 

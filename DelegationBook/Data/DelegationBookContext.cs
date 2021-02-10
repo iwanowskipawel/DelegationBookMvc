@@ -15,6 +15,7 @@ namespace DelegationBook.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
         public DbSet<KilometersCard> KilometersCards { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Trip> Trips { get; set; }
