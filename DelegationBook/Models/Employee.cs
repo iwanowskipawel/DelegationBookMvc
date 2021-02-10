@@ -8,6 +8,10 @@ namespace DelegationBook.Models
         [Key]
         public int EmployeeId { get; set; }
 
+        public string Position { get; set; }
+        public string Division { get; set; }
+        public bool IsDriver { get; set; }
+
         [Display(Name = "Wyjazdy")]
         public IEnumerable<Trip> Trips { get; set; }
     }

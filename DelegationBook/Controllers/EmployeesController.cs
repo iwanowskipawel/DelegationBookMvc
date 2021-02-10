@@ -54,7 +54,7 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,PersonId,FirstName,LastName")] Employee employee)
+        public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,PersonId,FirstName,LastName")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName")] Employee employee)
         {
             if (id != employee.EmployeeId)
             {
