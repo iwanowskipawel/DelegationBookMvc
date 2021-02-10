@@ -15,7 +15,7 @@ namespace DelegationBook.Models
         public string RegistrationNumber { get; set; }
 
         [Display(Name = "Główny kierowca")]
-        public Driver MainDriver { get; set; }
+        public Employee MainDriver { get; set; }
 
         [Display(Name = "Stan licznika")]
         public int MeterStatus { get; set; }
