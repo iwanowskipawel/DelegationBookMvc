@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DelegationBook.Migrations
 {
     [DbContext(typeof(DelegationBookContext))]
-    [Migration("20210209101531_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210210120847_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,7 +52,10 @@ namespace DelegationBook.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("MainDriverPersonId")
+                    b.Property<int?>("DriverEmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MainDriverEmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("MeterStatus")
@@ -66,7 +69,9 @@ namespace DelegationBook.Migrations
 
                     b.HasKey("CarId");
 
-                    b.HasIndex("MainDriverPersonId");
+                    b.HasIndex("DriverEmployeeId");
+
+                    b.HasIndex("MainDriverEmployeeId");
 
                     b.ToTable("Cars");
                 });
@@ -93,7 +98,7 @@ namespace DelegationBook.Migrations
 
             modelBuilder.Entity("DelegationBook.Models.Employee", b =>
                 {
-                    b.Property<int>("PersonId")
+                    b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -102,8 +107,8 @@ namespace DelegationBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
+                    b.Property<string>("Division")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -111,7 +116,10 @@ namespace DelegationBook.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PersonId");
+                    b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
 
@@ -180,7 +188,7 @@ namespace DelegationBook.Migrations
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DriverPersonId")
+                    b.Property<int?>("DriverEmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("FinalMeter")
@@ -189,7 +197,7 @@ namespace DelegationBook.Migrations
                     b.Property<int>("InitialMeter")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KeeperPersonId")
+                    b.Property<int?>("KeeperEmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("KilometersCardCardId")
@@ -200,9 +208,9 @@ namespace DelegationBook.Migrations
 
                     b.HasKey("TripId");
 
-                    b.HasIndex("DriverPersonId");
+                    b.HasIndex("DriverEmployeeId");
 
-                    b.HasIndex("KeeperPersonId");
+                    b.HasIndex("KeeperEmployeeId");
 
                     b.HasIndex("KilometersCardCardId");
 
@@ -215,17 +223,18 @@ namespace DelegationBook.Migrations
                 {
                     b.HasBaseType("DelegationBook.Models.Employee");
 
-                    b.Property<int>("DriverId")
-                        .HasColumnType("int");
-
                     b.HasDiscriminator().HasValue("Driver");
                 });
 
             modelBuilder.Entity("DelegationBook.Models.Car", b =>
                 {
-                    b.HasOne("DelegationBook.Models.Driver", "MainDriver")
+                    b.HasOne("DelegationBook.Models.Driver", null)
                         .WithMany("Cars")
-                        .HasForeignKey("MainDriverPersonId");
+                        .HasForeignKey("DriverEmployeeId");
+
+                    b.HasOne("DelegationBook.Models.Employee", "MainDriver")
+                        .WithMany()
+                        .HasForeignKey("MainDriverEmployeeId");
 
                     b.Navigation("MainDriver");
                 });
@@ -261,11 +270,11 @@ namespace DelegationBook.Migrations
                 {
                     b.HasOne("DelegationBook.Models.Driver", "Driver")
                         .WithMany()
-                        .HasForeignKey("DriverPersonId");
+                        .HasForeignKey("DriverEmployeeId");
 
                     b.HasOne("DelegationBook.Models.Employee", "Keeper")
                         .WithMany("Trips")
-                        .HasForeignKey("KeeperPersonId");
+                        .HasForeignKey("KeeperEmployeeId");
 
                     b.HasOne("DelegationBook.Models.KilometersCard", "KilometersCard")
                         .WithMany("Trips")

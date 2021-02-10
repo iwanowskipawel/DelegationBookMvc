@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DelegationBook.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,17 +27,17 @@ namespace DelegationBook.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    PersonId = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Division = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DriverId = table.Column<int>(type: "int", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.PersonId);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,17 +68,24 @@ namespace DelegationBook.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MainDriverPersonId = table.Column<int>(type: "int", nullable: true),
-                    MeterStatus = table.Column<int>(type: "int", nullable: false)
+                    MainDriverEmployeeId = table.Column<int>(type: "int", nullable: true),
+                    MeterStatus = table.Column<int>(type: "int", nullable: false),
+                    DriverEmployeeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.CarId);
                     table.ForeignKey(
-                        name: "FK_Cars_Employees_MainDriverPersonId",
-                        column: x => x.MainDriverPersonId,
+                        name: "FK_Cars_Employees_DriverEmployeeId",
+                        column: x => x.DriverEmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "PersonId",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Cars_Employees_MainDriverEmployeeId",
+                        column: x => x.MainDriverEmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -132,9 +139,9 @@ namespace DelegationBook.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DepartureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DriverPersonId = table.Column<int>(type: "int", nullable: true),
+                    DriverEmployeeId = table.Column<int>(type: "int", nullable: true),
                     ProjectId = table.Column<int>(type: "int", nullable: true),
-                    KeeperPersonId = table.Column<int>(type: "int", nullable: true),
+                    KeeperEmployeeId = table.Column<int>(type: "int", nullable: true),
                     Destination = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InitialMeter = table.Column<int>(type: "int", nullable: false),
                     FinalMeter = table.Column<int>(type: "int", nullable: false),
@@ -144,16 +151,16 @@ namespace DelegationBook.Migrations
                 {
                     table.PrimaryKey("PK_Trips", x => x.TripId);
                     table.ForeignKey(
-                        name: "FK_Trips_Employees_DriverPersonId",
-                        column: x => x.DriverPersonId,
+                        name: "FK_Trips_Employees_DriverEmployeeId",
+                        column: x => x.DriverEmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "PersonId",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Trips_Employees_KeeperPersonId",
-                        column: x => x.KeeperPersonId,
+                        name: "FK_Trips_Employees_KeeperEmployeeId",
+                        column: x => x.KeeperEmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "PersonId",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Trips_KilometersCards_KilometersCardCardId",
@@ -170,9 +177,14 @@ namespace DelegationBook.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_MainDriverPersonId",
+                name: "IX_Cars_DriverEmployeeId",
                 table: "Cars",
-                column: "MainDriverPersonId");
+                column: "DriverEmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_MainDriverEmployeeId",
+                table: "Cars",
+                column: "MainDriverEmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_AddressId",
@@ -190,14 +202,14 @@ namespace DelegationBook.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_DriverPersonId",
+                name: "IX_Trips_DriverEmployeeId",
                 table: "Trips",
-                column: "DriverPersonId");
+                column: "DriverEmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_KeeperPersonId",
+                name: "IX_Trips_KeeperEmployeeId",
                 table: "Trips",
-                column: "KeeperPersonId");
+                column: "KeeperEmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trips_KilometersCardCardId",
