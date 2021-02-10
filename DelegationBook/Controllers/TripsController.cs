@@ -48,11 +48,11 @@ namespace DelegationBook.Controllers
         public async Task<IActionResult> Create()
         {
             var employees = _context.Employees
-                .OrderBy(e => e.PersonId)
+                .OrderBy(e => e.EmployeeId)
                 .Select(e => e)
                 .Distinct();
 
-            ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.PersonId), nameof(Employee.FullName));
+            ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
 
             return View();
         }
@@ -67,7 +67,7 @@ namespace DelegationBook.Controllers
         {
             if (ModelState.IsValid)
             {
-                trip.Keeper = _context.Employees.First(e => e.PersonId == trip.Keeper.PersonId);
+                trip.Keeper = _context.Employees.First(e => e.EmployeeId == trip.Keeper.EmployeeId);
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

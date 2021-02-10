@@ -4,9 +4,6 @@ namespace DelegationBook.Models
 {
     public abstract class Person
     {
-        [Key]
-        public int PersonId { get; set; }
-
         [Display(Name = "Imię")]
         public string FirstName { get; set; }
 

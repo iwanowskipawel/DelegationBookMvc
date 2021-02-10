@@ -34,7 +34,7 @@ namespace DelegationBook.Controllers
             }
 
             var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.PersonId == id);
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace DelegationBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,PersonId,FirstName,LastName")] Employee employee)
         {
-            if (id != employee.PersonId)
+            if (id != employee.EmployeeId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace DelegationBook.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.PersonId))
+                    if (!EmployeeExists(employee.EmployeeId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace DelegationBook.Controllers
             }
 
             var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.PersonId == id);
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace DelegationBook.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.PersonId == id);
+            return _context.Employees.Any(e => e.EmployeeId == id);
         }
     }
 }
