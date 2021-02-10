@@ -51,9 +51,14 @@ namespace DelegationBook.Controllers
                 .OrderBy(e => e.EmployeeId)
                 .Select(e => e)
                 .Distinct();
-           
+            var drivers = _context.Employees
+                 .Where(e => e.IsDriver)
+                 .OrderBy(d => d.LastName)
+                 .Select(d => d)
+                 .Distinct();
 
             ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
+            ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
 
             return View();
         }

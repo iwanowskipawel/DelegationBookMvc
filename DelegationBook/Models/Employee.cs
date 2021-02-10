@@ -14,5 +14,6 @@ namespace DelegationBook.Models
 
         [Display(Name = "Wyjazdy")]
         public IEnumerable<Trip> Trips { get; set; }
+        public bool IsDriver { get; internal set; }
     }
 }
