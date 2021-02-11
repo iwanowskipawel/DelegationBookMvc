@@ -22,7 +22,7 @@ namespace DelegationBook.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            return View(await _context.Employees.OrderBy(e=>e.LastName).ToListAsync());
         }
 
         // GET: Employees/Details/5

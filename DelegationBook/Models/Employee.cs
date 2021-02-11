@@ -8,7 +8,10 @@ namespace DelegationBook.Models
         [Key]
         public int EmployeeId { get; set; }
 
+        [Display(Name = "Stanowisko")]
         public string Position { get; set; }
+
+        [Display(Name = "Zadkład/Dział")]
         public string Division { get; set; }
 
 

@@ -10,8 +10,8 @@ namespace DelegationBook.Models
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
-        [Display(Name = "Imię i nazwisko")]
-        public string FullName => $"{ FirstName } { LastName }";
+        [Display(Name = "Nazwisko i imię")]
+        public string FullName => $" { LastName } { FirstName }";
 
         public override string ToString() => FullName;
         
