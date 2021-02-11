@@ -10,10 +10,9 @@
 <p class="text-danger">Tego procesu nie można odwrócić!</p>
 <div>
     <hr />
-      
     <form asp-action="Delete">
         <input type="hidden" asp-for="EmployeeId" />
-        <input type="submit" value="Usuń" class="btn btn-danger" /> |
-        <a asp-action="Details" asp-route-id="@Model.EmployeeId">Anuluj</a>
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <a asp-action="Details" asp-route-id="@Model.EmployeeId" class="ml-3 btn btn-secondary">Anuluj</a>
     </form>
 </div>
