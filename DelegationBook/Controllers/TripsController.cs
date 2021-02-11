@@ -129,7 +129,7 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
-                    trip.Driver = _context.Drivers.First(d => d.EmployeeId == trip.Driver.EmployeeId);
+                    trip.Driver = _context.Employees.First(d => d.EmployeeId == trip.Driver.EmployeeId);
                     _context.Update(trip);
                     await _context.SaveChangesAsync();
                 }
