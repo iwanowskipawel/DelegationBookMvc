@@ -16,6 +16,6 @@ namespace DelegationBook.Models
         public IEnumerable<Trip> Trips { get; set; }
         
         [Display(Name = "Kierowca")]
-        public bool IsDriver { get; internal set; }
+        public bool IsDriver { get; set; }
     }
 }
