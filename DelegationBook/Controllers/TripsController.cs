@@ -26,6 +26,7 @@ namespace DelegationBook.Controllers
             return View(await _context.Trips
                 .Include(p=>p.Keeper)
                 .Include(d=>d.Driver)
+                .Include(p=>p.Project)
                 .ToListAsync());
         }
 
@@ -59,9 +60,14 @@ namespace DelegationBook.Controllers
                  .OrderBy(d => d.LastName)
                  .Select(d => d)
                  .Distinct();
+            var projects = _context.Projects
+                .OrderBy(p => p.Symbol)
+                .Select(p => p)
+                .Distinct();
 
             ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
             ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
+            ViewData["Projects"] = new SelectList(await projects.ToListAsync(), nameof(Project.ProjectId), nameof(Project.Symbol));
 
             return View();
         }
@@ -72,12 +78,13 @@ namespace DelegationBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Driver,Destination,InitialMeter,FinalMeter")] Trip trip)
+            [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Driver,Project,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
             if (ModelState.IsValid)
             {
                 trip.Keeper = _context.Employees.First(e => e.EmployeeId == trip.Keeper.EmployeeId);
                 trip.Driver = _context.Employees.First(e => e.EmployeeId == trip.Driver.EmployeeId);
+                trip.Project = _context.Projects.First(p => p.ProjectId == trip.Project.ProjectId);
 
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
