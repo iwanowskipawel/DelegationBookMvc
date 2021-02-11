@@ -11,15 +11,15 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="bg-light">
+            <th>
+                @Html.DisplayNameFor(model => model.Destination)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DepartureDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ArrivalDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Project)
@@ -42,14 +42,14 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td class="font-weight-bold">
+                @Html.DisplayFor(itemModel => item.Destination)
+            </td>
             <td>
                 @Html.DisplayFor(itemModel => item.DepartureDate)
             </td>
             <td>
                 @Html.DisplayFor(itemModel => item.ArrivalDate)
-            </td>
-            <td>
-                @Html.DisplayFor(itemModel => item.Destination)
             </td>
             <td>
                 @Html.DisplayFor(itemModel => item.Project.Symbol)
@@ -67,9 +67,7 @@
                 @Html.DisplayFor(itemModel => item.Distance)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TripId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.TripId">Szczegóły</a>
             </td>
         </tr>
 }

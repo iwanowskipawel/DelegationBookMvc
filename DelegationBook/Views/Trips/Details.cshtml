@@ -1,13 +1,13 @@
 ﻿@model DelegationBook.Models.Trip
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "szczegóły";
 }
 
-<h1>Details</h1>
+<h2>Sczegóły</h2>
 
 <div>
-    <h4>Trip</h4>
+    <h4>Wyjazd</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -43,6 +43,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.TripId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.TripId">Edytuj</a> |
+    <a asp-action="Delete" asp-route-id="@Model.TripId">Usuń</a> |
+    <a asp-action="Index">Powrót do listy</a>
 </div>
