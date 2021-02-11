@@ -23,7 +23,10 @@ namespace DelegationBook.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _context.Trips.Include(p=>p.Keeper).ToListAsync());
+            return View(await _context.Trips
+                .Include(p=>p.Keeper)
+                .Include(d=>d.Driver)
+                .ToListAsync());
         }
 
         // GET: Trips/Details/5
@@ -85,6 +88,17 @@ namespace DelegationBook.Controllers
         // GET: Trips/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var drivers = _context.Employees
+                    .Where(e => e.IsDriver)
+                    .OrderBy(d => d.LastName)
+                    .Select(d => d)
+                    .Distinct();
+           
+            ViewData["Drivers"] = new SelectList(
+                await drivers.ToListAsync(), 
+                nameof(Employee.EmployeeId), 
+                nameof(Employee.FullName));
+            
             if (id == null)
             {
                 return NotFound();
@@ -104,7 +118,7 @@ namespace DelegationBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            int id, [Bind("TripId,DepartureDate,ArrivalDate,Destination,InitialMeter,FinalMeter")] Trip trip)
+            int id, [Bind("TripId,DepartureDate,ArrivalDate,Destination,Driver,InitialMeter,FinalMeter")] Trip trip)
         {
             if (id != trip.TripId)
             {
@@ -115,6 +129,7 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
+                    trip.Driver = _context.Drivers.First(d => d.EmployeeId == trip.Driver.EmployeeId);
                     _context.Update(trip);
                     await _context.SaveChangesAsync();
                 }

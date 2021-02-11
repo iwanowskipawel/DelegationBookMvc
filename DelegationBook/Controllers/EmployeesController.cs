@@ -68,6 +68,13 @@ namespace DelegationBook.Controllers
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var drivers = _context.Employees
+                .Where(d => d.IsDriver)
+                .Select(d => d)
+                .Distinct();
+
+            ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), "EmployeeId", "FullName");
+            
             if (id == null)
             {
                 return NotFound();
