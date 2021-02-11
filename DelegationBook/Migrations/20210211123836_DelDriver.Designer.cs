@@ -4,14 +4,16 @@ using DelegationBook.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DelegationBook.Migrations
 {
     [DbContext(typeof(DelegationBookContext))]
-    partial class DelegationBookContextModelSnapshot : ModelSnapshot
+    [Migration("20210211123836_DelDriver")]
+    partial class DelDriver
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +52,9 @@ namespace DelegationBook.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("DriverEmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MainDriverEmployeeId")
                         .HasColumnType("int");
 
@@ -63,6 +68,8 @@ namespace DelegationBook.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CarId");
+
+                    b.HasIndex("DriverEmployeeId");
 
                     b.HasIndex("MainDriverEmployeeId");
 
@@ -96,6 +103,10 @@ namespace DelegationBook.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Division")
                         .HasColumnType("nvarchar(max)");
 
@@ -114,6 +125,8 @@ namespace DelegationBook.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Employee");
                 });
 
             modelBuilder.Entity("DelegationBook.Models.KilometersCard", b =>
@@ -209,8 +222,19 @@ namespace DelegationBook.Migrations
                     b.ToTable("Trips");
                 });
 
+            modelBuilder.Entity("DelegationBook.Models.Driver", b =>
+                {
+                    b.HasBaseType("DelegationBook.Models.Employee");
+
+                    b.HasDiscriminator().HasValue("Driver");
+                });
+
             modelBuilder.Entity("DelegationBook.Models.Car", b =>
                 {
+                    b.HasOne("DelegationBook.Models.Driver", null)
+                        .WithMany("Cars")
+                        .HasForeignKey("DriverEmployeeId");
+
                     b.HasOne("DelegationBook.Models.Employee", "MainDriver")
                         .WithMany()
                         .HasForeignKey("MainDriverEmployeeId");
@@ -247,12 +271,12 @@ namespace DelegationBook.Migrations
 
             modelBuilder.Entity("DelegationBook.Models.Trip", b =>
                 {
-                    b.HasOne("DelegationBook.Models.Employee", "Driver")
+                    b.HasOne("DelegationBook.Models.Driver", "Driver")
                         .WithMany()
                         .HasForeignKey("DriverEmployeeId");
 
                     b.HasOne("DelegationBook.Models.Employee", "Keeper")
-                        .WithMany()
+                        .WithMany("Trips")
                         .HasForeignKey("KeeperEmployeeId");
 
                     b.HasOne("DelegationBook.Models.KilometersCard", "KilometersCard")
@@ -277,6 +301,11 @@ namespace DelegationBook.Migrations
                     b.Navigation("KilometersCards");
                 });
 
+            modelBuilder.Entity("DelegationBook.Models.Employee", b =>
+                {
+                    b.Navigation("Trips");
+                });
+
             modelBuilder.Entity("DelegationBook.Models.KilometersCard", b =>
                 {
                     b.Navigation("Trips");
@@ -285,6 +314,11 @@ namespace DelegationBook.Migrations
             modelBuilder.Entity("DelegationBook.Models.Project", b =>
                 {
                     b.Navigation("Trips");
+                });
+
+            modelBuilder.Entity("DelegationBook.Models.Driver", b =>
+                {
+                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

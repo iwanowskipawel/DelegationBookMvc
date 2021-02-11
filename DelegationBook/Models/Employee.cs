@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DelegationBook.Models
 {
@@ -16,6 +17,7 @@ namespace DelegationBook.Models
 
 
         [Display(Name = "Wyjazdy")]
+        [NotMapped]
         public IEnumerable<Trip> Trips { get; set; }
         
         [Display(Name = "Kierowca")]
