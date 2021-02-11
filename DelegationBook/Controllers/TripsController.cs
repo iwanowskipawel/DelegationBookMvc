@@ -72,11 +72,13 @@ namespace DelegationBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Destination,InitialMeter,FinalMeter")] Trip trip)
+            [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Driver,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
             if (ModelState.IsValid)
             {
                 trip.Keeper = _context.Employees.First(e => e.EmployeeId == trip.Keeper.EmployeeId);
+                trip.Driver = _context.Employees.First(e => e.EmployeeId == trip.Driver.EmployeeId);
+
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -129,7 +131,7 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
-                    //trip.Driver = _context.Employees.First(d => d.EmployeeId == trip.Driver.EmployeeId);
+                    trip.Driver = _context.Employees.First(d => d.EmployeeId == trip.Driver.EmployeeId);
                     _context.Update(trip);
                     await _context.SaveChangesAsync();
                 }
