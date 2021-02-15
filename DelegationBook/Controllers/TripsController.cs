@@ -86,9 +86,9 @@ namespace DelegationBook.Controllers
         {
             if (ModelState.IsValid)
             {
-                trip.Keeper = _context.Employees.First(e => e.EmployeeId == trip.Keeper.EmployeeId);
-                trip.Driver = _context.Employees.First(e => e.EmployeeId == trip.Driver.EmployeeId);
-                trip.Project = _context.Projects.First(p => p.ProjectId == trip.Project.ProjectId);
+                trip.Keeper = await _context.Employees.FindAsync(trip.Keeper.EmployeeId);
+                trip.Driver = await _context.Employees.FindAsync(trip.Driver.EmployeeId);
+                trip.Project = await _context.Projects.FindAsync(trip.Project.ProjectId);
 
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
@@ -150,9 +150,9 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
-                    trip.Keeper = _context.Employees.First(e => e.EmployeeId == trip.Keeper.EmployeeId);
-                    trip.Driver = _context.Employees.First(e => e.EmployeeId == trip.Driver.EmployeeId);
-                    trip.Project = _context.Projects.First(p => p.ProjectId == trip.Project.ProjectId);
+                    trip.Keeper = await _context.Employees.FindAsync(trip.Keeper.EmployeeId);
+                    trip.Driver = await _context.Employees.FindAsync(trip.Driver.EmployeeId);
+                    trip.Project = await _context.Projects.FindAsync(trip.Project.ProjectId);
 
                     _context.Update(trip);
                     await _context.SaveChangesAsync();

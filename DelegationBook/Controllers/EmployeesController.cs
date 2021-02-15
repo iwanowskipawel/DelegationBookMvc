@@ -73,7 +73,7 @@ namespace DelegationBook.Controllers
                 .Select(d => d)
                 .Distinct();
 
-            ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), "EmployeeId", "FullName");
+            ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
             
             if (id == null)
             {
