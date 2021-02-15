@@ -22,7 +22,7 @@ namespace DelegationBook.Models
         public IEnumerable<Trip> Trips { get; set; }
 
         [Display(Name = "Przejechany dystans")]
-        public int TotalDistance => Trips.Count() > 0 ? Trips.Sum(x => x.Distance) : 0;
+        public int TotalDistance => Trips != null ? Trips.Sum(x => x.Distance) : 0;
 
         public override string ToString() => CardSymbol;
 
