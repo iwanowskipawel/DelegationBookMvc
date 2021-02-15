@@ -101,11 +101,10 @@ namespace DelegationBook.Controllers
                 .Select(c => new SelectListItem
                 {
                     Text = $"{c.Model} - {c.RegistrationNumber}",
-                    Value = c.CarId.ToString(),
-                    Selected = c.CarId == 2
+                    Value = c.CarId.ToString()
                 });
 
-            ViewData["Cars"] = new SelectList(cars, "Value", "Text", kilometersCard.Car.CarId);
+            ViewData["Cars"] = new SelectList(cars, "Value", "Text");
 
             return View(kilometersCard);
         }
