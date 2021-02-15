@@ -1,36 +1,43 @@
 ﻿@model DelegationBook.Models.Car
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h1>Details</h1>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>Car</h4>
+    <h4>Samochód</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Model)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Model)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RegistrationNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RegistrationNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MainDriver)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MainDriver.FullName)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MeterStatus)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MeterStatus)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CarId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.CarId">Edytuj</a> |
+    <a asp-action="Delete" asp-route-id="@Model.CarId">Usuń</a> |
+    <a asp-action="Index">Powrót do listy</a>
 </div>

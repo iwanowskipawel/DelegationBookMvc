@@ -36,6 +36,7 @@ namespace DelegationBook.Controllers
             }
 
             var car = await _context.Cars
+                .Include(c=>c.MainDriver)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {
