@@ -4,30 +4,17 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h2>Usuwanie</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h5>
+    Czy na pewno chcesz usunąć z listy Temat o numerze <span class="font-weight-bold">@Model.Symbol</span>?
+</h5>
+<p class="text-danger">Tego procesu nie można odwrócić!</p>
 <div>
-    <h4>Project</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Symbol)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Symbol)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-    </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProjectId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <a asp-action="Details" asp-route-id="@Model.ProjectId" class="ml-3 btn btn-secondary">Anuluj</a>
     </form>
 </div>

@@ -6,46 +6,19 @@
 
 <h2>Usuwanie</h2>
 
-<h4>Czy jesteś pewien, że chcesz usunąć dane o wyjeździe?</h4>
-<p class="text-danger font-weight-bold">Tego procesu nie można cofnąć!</p>
+<h5>
+    Czy na pewno chcesz usunąć z listy wyjazd do
+    <span class="font-weight-bold">@Model.Destination</span>
+    z dnia
+    <span class="font-weight-bold">@Model.DepartureDate.Date</span>
+    ?
+</h5>
+<p class="text-danger">Tego procesu nie można odwrócić!</p>
 <div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.DepartureDate)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.DepartureDate)
-        </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.ArrivalDate)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.ArrivalDate)
-        </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.Destination)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.Destination)
-        </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.InitialMeter)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.InitialMeter)
-        </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.FinalMeter)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.FinalMeter)
-        </dd>
-    </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="TripId" />
         <input type="submit" value="Usuń" class="btn btn-danger" />
-        <a asp-action="Details" asp-route-id="@Model.TripId" class="btn btn-secondary">Anuluj</a>
+        <a asp-action="Details" asp-route-id="@Model.TripId" class="ml-3 btn btn-secondary">Anuluj</a>
     </form>
 </div>
