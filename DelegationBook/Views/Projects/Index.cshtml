@@ -7,7 +7,7 @@
 <h1>Tematy</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowy</a>
 </p>
 <table class="table">
     <thead>
@@ -16,13 +16,7 @@
                 @Html.DisplayNameFor(model => model.Symbol)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company)
             </th>
             <th></th>
         </tr>
@@ -34,18 +28,10 @@
                 @Html.DisplayFor(modelItem => item.Symbol)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.ProjectId">Szczegóły</a>
             </td>
         </tr>
 }
