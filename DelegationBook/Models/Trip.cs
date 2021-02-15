@@ -40,6 +40,7 @@ namespace DelegationBook.Models
         [Display(Name = "Dystans")]
         public int Distance => FinalMeter - InitialMeter;
 
+        [Display(Name = "Karta kilometrów")]
         public KilometersCard KilometersCard { get; set; }
 
         public override string ToString() => $"{Destination} - {DepartureDate}-{ArrivalDate}";

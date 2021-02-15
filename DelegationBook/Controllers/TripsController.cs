@@ -68,10 +68,15 @@ namespace DelegationBook.Controllers
                 .OrderBy(p => p.Symbol)
                 .Select(p => p)
                 .Distinct();
+            var kilometerCards = _context.KilometersCards
+                .OrderBy(c => c.CardId)
+                .Select(c => c)
+                .Distinct();
 
             ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
             ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
             ViewData["Projects"] = new SelectList(await projects.ToListAsync(), nameof(Project.ProjectId), nameof(Project.Symbol));
+            ViewData["KilometerCards"] = new SelectList(await kilometerCards.ToListAsync(), nameof(KilometersCard.CardId), nameof(KilometersCard.CardSymbol));
 
             return View();
         }
