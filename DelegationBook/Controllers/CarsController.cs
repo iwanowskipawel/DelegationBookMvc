@@ -49,6 +49,13 @@ namespace DelegationBook.Controllers
         // GET: Cars/Create
         public IActionResult Create()
         {
+            var drivers = _context.Employees
+                .Where(e => e.IsDriver)
+                .Distinct()
+                .Select(d => d);
+
+            ViewData["Drivers"] = new SelectList(drivers, nameof(Driver.EmployeeId), nameof(Driver.FullName));
+
             return View();
         }
 
@@ -57,10 +64,12 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,Model,RegistrationNumber,MeterStatus")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,Model,RegistrationNumber,MainDriver,MeterStatus")] Car car)
         {
             if (ModelState.IsValid)
             {
+                car.MainDriver = await _context.Employees.FindAsync(car.MainDriver.EmployeeId);
+
                 _context.Add(car);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -76,6 +85,13 @@ namespace DelegationBook.Controllers
                 return NotFound();
             }
 
+            var drivers = _context.Employees
+                .Where(e => e.IsDriver)
+                .Distinct()
+                .Select(d => d);
+
+            ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), nameof(Driver.EmployeeId), nameof(Driver.FullName));
+
             var car = await _context.Cars.FindAsync(id);
             if (car == null)
             {
@@ -89,7 +105,7 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,Model,RegistrationNumber,MeterStatus")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,Model,RegistrationNumber,MainDriver,MeterStatus")] Car car)
         {
             if (id != car.CarId)
             {
@@ -100,6 +116,8 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
+                    car.MainDriver = await _context.Employees.FindAsync(car.MainDriver.EmployeeId);
+
                     _context.Update(car);
                     await _context.SaveChangesAsync();
                 }
