@@ -1,30 +1,43 @@
 ﻿@model DelegationBook.Models.KilometersCard
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h1>Details</h1>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>KilometersCard</h4>
+    <h4>Karta kilometrów</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CardSymbol)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CardSymbol)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WorkCardNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.WorkCardNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Car)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Car.Model) - @Html.DisplayFor(model => model.Car.RegistrationNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalDistance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalDistance)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CardId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.CardId">Edytuj</a> |
+    <a asp-action="Delete" asp-route-id="@Model.CardId">Usuń</a> |
+    <a asp-action="Index">Powrót do listy</a>
 </div>
