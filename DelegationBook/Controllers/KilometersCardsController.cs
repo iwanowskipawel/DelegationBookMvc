@@ -51,6 +51,12 @@ namespace DelegationBook.Controllers
         // GET: KilometersCards/Create
         public IActionResult Create()
         {
+            var cars = _context.Cars
+                .OrderBy(c=>c.CarId)
+                .Select(c => new SelectListItem($"{c.Model} - {c.RegistrationNumber}", c.CarId.ToString()));
+
+            ViewData["Cars"] = new SelectList(cars,"Value","Text");
+
             return View();
         }
 
@@ -59,10 +65,12 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CardId,CardSymbol,WorkCardNumber")] KilometersCard kilometersCard)
+        public async Task<IActionResult> Create([Bind("CardId,CardSymbol,Car,WorkCardNumber")] KilometersCard kilometersCard)
         {
             if (ModelState.IsValid)
             {
+                kilometersCard.Car = await _context.Cars.FindAsync(kilometersCard.Car.CarId);
+
                 _context.Add(kilometersCard);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

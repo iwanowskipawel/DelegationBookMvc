@@ -1,12 +1,12 @@
 ﻿@model DelegationBook.Models.KilometersCard
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj kartę kilometrów";
 }
 
-<h1>Create</h1>
+<h2>Dodaj</h2>
 
-<h4>KilometersCard</h4>
+<h4>Karta kilometrowa</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,6 +21,13 @@
                 <label asp-for="WorkCardNumber" class="control-label"></label>
                 <input asp-for="WorkCardNumber" class="form-control" />
                 <span asp-validation-for="WorkCardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car" class="control-label"></label>
+                <select asp-for="Car.CarId" asp-items="ViewBag.Cars" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
