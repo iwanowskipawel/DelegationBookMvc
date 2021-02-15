@@ -7,7 +7,7 @@
 <h1>Samochody</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowy</a>
 </p>
 <table class="table">
     <thead>
@@ -17,12 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RegistrationNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MainDriver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MeterStatus)
             </th>
             <th></th>
         </tr>
@@ -37,15 +31,7 @@
                 @Html.DisplayFor(modelItem => item.RegistrationNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MainDriver)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeterStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.CarId">Szczegóły</a>
             </td>
         </tr>
 }

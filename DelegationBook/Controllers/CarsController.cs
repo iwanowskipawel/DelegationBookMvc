@@ -22,7 +22,9 @@ namespace DelegationBook.Controllers
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cars.ToListAsync());
+            return View(await _context.Cars
+                .Include(c=>c.MainDriver)
+                .ToListAsync());
         }
 
         // GET: Cars/Details/5
