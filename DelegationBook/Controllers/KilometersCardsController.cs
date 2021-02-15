@@ -86,11 +86,27 @@ namespace DelegationBook.Controllers
                 return NotFound();
             }
 
-            var kilometersCard = await _context.KilometersCards.FindAsync(id);
+            var kilometersCard = await _context.KilometersCards
+                .Include(k=>k.Car)
+                .FirstOrDefaultAsync(k=>k.CardId == id);
+            
             if (kilometersCard == null)
             {
                 return NotFound();
             }
+
+            var cars = _context.Cars
+                .Include(c => c.KilometersCards)
+                .OrderBy(c => c.CarId)
+                .Select(c => new SelectListItem
+                {
+                    Text = $"{c.Model} - {c.RegistrationNumber}",
+                    Value = c.CarId.ToString(),
+                    Selected = c.CarId == 2
+                });
+
+            ViewData["Cars"] = new SelectList(cars, "Value", "Text", kilometersCard.Car.CarId);
+
             return View(kilometersCard);
         }
 
@@ -99,7 +115,7 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CardId,CardSymbol,WorkCardNumber")] KilometersCard kilometersCard)
+        public async Task<IActionResult> Edit(int id, [Bind("CardId,CardSymbol,Car,WorkCardNumber")] KilometersCard kilometersCard)
         {
             if (id != kilometersCard.CardId)
             {
@@ -110,6 +126,8 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
+                    kilometersCard.Car = await _context.Cars.FindAsync(kilometersCard.Car.CarId);
+
                     _context.Update(kilometersCard);
                     await _context.SaveChangesAsync();
                 }

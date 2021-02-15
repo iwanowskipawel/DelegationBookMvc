@@ -1,12 +1,12 @@
 ﻿@model DelegationBook.Models.KilometersCard
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja";
 }
 
-<h1>Edit</h1>
+<h2>Edytuj</h2>
 
-<h4>KilometersCard</h4>
+<h4>Karta kilometrów</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +24,22 @@
                 <span asp-validation-for="WorkCardNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Car" class="control-label"></label>
+                @*<select asp-for="Car.CarId" asp-items="ViewBag.Cars" class="form-control">
+                        <option value=""></option>
+                    </select>*@
+                @Html.DropDownListFor(m => m.Car.CarId, ViewBag.Cars as SelectList, new { @class = "form-control" })
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Details" asp-route-id="@Model.CardId">Anuluj</a>
 </div>
 
 @section Scripts {
