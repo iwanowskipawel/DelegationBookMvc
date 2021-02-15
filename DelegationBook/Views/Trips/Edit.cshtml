@@ -14,16 +14,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TripId" />
             <div class="form-group">
-                <label asp-for="Destination" class="control-label"></label>
-                <input asp-for="Destination" class="form-control" />
-                <span asp-validation-for="Destination" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Driver" class="control-label"></label>
-                <select asp-for="Driver.EmployeeId" asp-items="ViewBag.Drivers" class="form-control"></select>
-                <span asp-validation-for="Driver" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="DepartureDate" class="control-label"></label>
                 <input asp-for="DepartureDate" class="form-control" />
                 <span asp-validation-for="DepartureDate" class="text-danger"></span>
@@ -32,6 +22,32 @@
                 <label asp-for="ArrivalDate" class="control-label"></label>
                 <input asp-for="ArrivalDate" class="form-control" />
                 <span asp-validation-for="ArrivalDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Destination" class="control-label"></label>
+                <input asp-for="Destination" class="form-control" />
+                <span asp-validation-for="Destination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project" class="control-label"></label>
+                <select asp-for="Project.ProjectId" asp-items="ViewBag.Projects" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Project.ProjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keeper" class="control-label"></label>
+                <select asp-for="Keeper.EmployeeId" asp-items="ViewBag.Employees" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Keeper.EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Driver" class="control-label"></label>
+                <select asp-for="Driver.EmployeeId" asp-items="ViewBag.Drivers" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="Driver.EmployeeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InitialMeter" class="control-label"></label>
@@ -44,7 +60,7 @@
                 <span asp-validation-for="FinalMeter" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>

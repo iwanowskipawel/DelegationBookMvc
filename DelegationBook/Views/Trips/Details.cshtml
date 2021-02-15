@@ -10,36 +10,67 @@
     <h4>Wyjazd</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.DepartureDate)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.DepartureDate)
-        </dd>
-        <dt class = "col-sm-3">
-            @Html.DisplayNameFor(model => model.ArrivalDate)
-        </dt>
-        <dd class = "col-sm-9">
-            @Html.DisplayFor(model => model.ArrivalDate)
-        </dd>
-        <dt class = "col-sm-3">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Destination)
         </dt>
-        <dd class = "col-sm-9">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Destination)
         </dd>
-        <dt class = "col-sm-3">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Project)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Project.Symbol)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ArrivalDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ArrivalDate)
+        </dd>
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.InitialMeter)
         </dt>
-        <dd class = "col-sm-9">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.InitialMeter)
         </dd>
-        <dt class = "col-sm-3">
+        <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.FinalMeter)
         </dt>
-        <dd class = "col-sm-9">
+        <dd class="col-sm-9">
             @Html.DisplayFor(model => model.FinalMeter)
         </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Keeper)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Keeper.FullName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Driver)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Driver.FullName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.KilometersCard.Car)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.KilometersCard.Car.RegistrationNumber)
+        </dd>
+
     </dl>
 </div>
 <div>

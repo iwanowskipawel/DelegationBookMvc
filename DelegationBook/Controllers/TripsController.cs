@@ -39,6 +39,10 @@ namespace DelegationBook.Controllers
             }
 
             var trip = await _context.Trips
+                .Include(t=>t.Keeper)
+                .Include(t=>t.Driver)
+                .Include(t=>t.KilometersCard.Car)
+                .Include(t=>t.Project)
                 .FirstOrDefaultAsync(m => m.TripId == id);
             if (trip == null)
             {
@@ -97,17 +101,25 @@ namespace DelegationBook.Controllers
         // GET: Trips/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var employees = _context.Employees
+                .OrderBy(e => e.EmployeeId)
+                .Select(e => e)
+                .Distinct();
             var drivers = _context.Employees
-                    .Where(e => e.IsDriver)
-                    .OrderBy(d => d.LastName)
-                    .Select(d => d)
-                    .Distinct();
-           
-            ViewData["Drivers"] = new SelectList(
-                await drivers.ToListAsync(), 
-                nameof(Employee.EmployeeId), 
-                nameof(Employee.FullName));
-            
+                 .Where(e => e.IsDriver)
+                 .OrderBy(d => d.LastName)
+                 .Select(d => d)
+                 .Distinct();
+            var projects = _context.Projects
+                .OrderBy(p => p.Symbol)
+                .Select(p => p)
+                .Distinct();
+
+            ViewData["Employees"] = new SelectList(await employees.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
+            ViewData["Drivers"] = new SelectList(await drivers.ToListAsync(), nameof(Employee.EmployeeId), nameof(Employee.FullName));
+            ViewData["Projects"] = new SelectList(await projects.ToListAsync(), nameof(Project.ProjectId), nameof(Project.Symbol));
+
+
             if (id == null)
             {
                 return NotFound();
@@ -127,7 +139,7 @@ namespace DelegationBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-            int id, [Bind("TripId,DepartureDate,ArrivalDate,Destination,Driver,InitialMeter,FinalMeter")] Trip trip)
+            int id, [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Driver,Project,Destination,InitialMeter,FinalMeter")] Trip trip)
         {
             if (id != trip.TripId)
             {
@@ -138,7 +150,10 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
-                    trip.Driver = _context.Employees.First(d => d.EmployeeId == trip.Driver.EmployeeId);
+                    trip.Keeper = _context.Employees.First(e => e.EmployeeId == trip.Keeper.EmployeeId);
+                    trip.Driver = _context.Employees.First(e => e.EmployeeId == trip.Driver.EmployeeId);
+                    trip.Project = _context.Projects.First(p => p.ProjectId == trip.Project.ProjectId);
+
                     _context.Update(trip);
                     await _context.SaveChangesAsync();
                 }
