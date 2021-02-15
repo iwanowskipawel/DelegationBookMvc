@@ -93,6 +93,23 @@ namespace DelegationBook.Data
 
                     context.Projects.AddRange(project1, project2);
 
+                    Car car1 = new Car
+                    {
+                        MainDriver = driver1,
+                        MeterStatus = 354124,
+                        Model = "Ford Transit",
+                        RegistrationNumber = "WB 65788"
+                    };
+                    Car car2 = new Car
+                    {
+                        MainDriver = driver2,
+                        MeterStatus = 276345,
+                        Model = "Ford Transit",
+                        RegistrationNumber = "WB 9135F"
+                    };
+
+                    context.Cars.AddRange(car1, car2);
+
                     Trip trip1 = new Trip
                     {
                         ArrivalDate = new DateTime(2021, 2, 4),
@@ -117,7 +134,37 @@ namespace DelegationBook.Data
                         FinalMeter = 158456
                     };
 
-                    context.Trips.AddRange(trip1, trip2);
+                    Trip trip3 = new Trip
+                    {
+                        ArrivalDate = new DateTime(2021, 2, 9),
+                        DepartureDate = new DateTime(2021, 2, 8),
+                        Destination = "Gdańsk",
+                        Keeper = employee2,
+                        Driver = driver1,
+                        Project = project2,
+                        InitialMeter = 158456,
+                        FinalMeter = 159456
+                    };
+
+                    context.Trips.AddRange(trip1, trip2, trip3);
+
+                    KilometersCard card1 = new KilometersCard
+                    {
+                        Car = car1,
+                        CardSymbol = "7/2020",
+                        Trips = new Trip[] { trip1 },
+                        WorkCardNumber = "123"
+                    };
+                    KilometersCard card2 = new KilometersCard
+                    {
+                        Car = car2,
+                        CardSymbol = "12/2020",
+                        Trips = new Trip[] { trip2, trip3 },
+                        WorkCardNumber = "45"
+                    };
+
+                    context.KilometersCards.AddRange(card1, card2);
+
                     context.SaveChanges();
                 }
             }
