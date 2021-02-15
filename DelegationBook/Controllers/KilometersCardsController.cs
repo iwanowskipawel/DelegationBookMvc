@@ -22,7 +22,10 @@ namespace DelegationBook.Controllers
         // GET: KilometersCards
         public async Task<IActionResult> Index()
         {
-            return View(await _context.KilometersCards.Include(k=>k.Trips).ToListAsync());
+            return View(await _context.KilometersCards
+                .Include(k=>k.Trips)
+                .Include(k=>k.Car)
+                .ToListAsync());
         }
 
         // GET: KilometersCards/Details/5

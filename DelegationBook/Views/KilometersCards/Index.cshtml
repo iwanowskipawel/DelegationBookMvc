@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.CardSymbol)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Car)
+                @Html.DisplayFor(modelItem => item.Car.Model) - @Html.DisplayFor(modelItem => item.Car.RegistrationNumber)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.CardId">Szczegóły</a>
