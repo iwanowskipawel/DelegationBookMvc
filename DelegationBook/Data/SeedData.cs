@@ -57,36 +57,48 @@ namespace DelegationBook.Data
 
                     context.Employees.AddRange(employee1, employee2, driver1, driver2);
 
+                    Address address1 = new Address
+                    {
+                        City = "Warszawa",
+                        PostalCode = "01-494",
+                        Street = "Marszałkowska",
+                        Number = "15/16"
+                    };
+
+                    Address address2 = new Address
+                    {
+                        City = "Gdańsk",
+                        PostalCode = "21-500",
+                        Street = "Wiejska",
+                        Number = "123"
+                    };
+
+                    context.Addresses.AddRange(address1, address2);
+
+                    Company company1 = new Company
+                    {
+                        Address = address1,
+                        Name = "Budexpol"
+                    };
+
+                    Company company2 = new Company
+                    {
+                        Address = address2,
+                        Name = "Polbudex"
+                    };
+
+                    context.Companies.AddRange(company1, company2);
+
                     Project project1 = new Project
                     {
-                        Company = new Company
-                        {
-                            Address = new Address
-                            {
-                                City = "Warszawa",
-                                PostalCode = "01-494",
-                                Street = "Marszałkowska",
-                                Number = "15/16"
-                            },
-                            Name = "Budexpol"
-                        },
+                        Company = company1,
                         Symbol = "0-5519-24-1-00",
                         Title = "Budowa lotniska"
                     };
 
                     Project project2 = new Project
                     {
-                        Company = new Company
-                        {
-                            Address = new Address
-                            {
-                                City = "Gdańsk",
-                                PostalCode = "21-500",
-                                Street = "Wiejska",
-                                Number = "123"
-                            },
-                            Name = "Polbudex"
-                        },
+                        Company = company2,
                         Symbol = "0-6512-24-1-00",
                         Title = "Remont DS"
                     };
@@ -100,6 +112,7 @@ namespace DelegationBook.Data
                         Model = "Ford Transit",
                         RegistrationNumber = "WB 65788"
                     };
+
                     Car car2 = new Car
                     {
                         MainDriver = driver2,
@@ -155,6 +168,7 @@ namespace DelegationBook.Data
                         Trips = new Trip[] { trip1 },
                         WorkCardNumber = "123"
                     };
+
                     KilometersCard card2 = new KilometersCard
                     {
                         Car = car2,
