@@ -76,6 +76,13 @@ namespace DelegationBook.Controllers
                 return NotFound();
             }
 
+            var companies = _context.Companies
+                .OrderBy(c => c.CompanyId)
+                .Select(c=>c)
+                .Distinct();
+
+            ViewData["Companies"] = new SelectList(await companies.ToListAsync(), nameof(Company.CompanyId), nameof(Company.Name));
+
             var project = await _context.Projects.FindAsync(id);
             if (project == null)
             {
@@ -89,7 +96,7 @@ namespace DelegationBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,Symbol,Title")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectId,Symbol,Title,Company")] Project project)
         {
             if (id != project.ProjectId)
             {
@@ -100,6 +107,8 @@ namespace DelegationBook.Controllers
             {
                 try
                 {
+                    project.Company = await _context.Companies.FindAsync(project.Company.CompanyId);
+
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
