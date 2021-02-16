@@ -37,6 +37,7 @@ namespace DelegationBook.Controllers
 
             var project = await _context.Projects
                 .Include(p=>p.Company)
+                .Include(p=>p.Trips).ThenInclude(t=>t.Project)
                 .FirstOrDefaultAsync(m => m.ProjectId == id);
             if (project == null)
             {

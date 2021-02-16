@@ -37,9 +37,10 @@ namespace DelegationBook.Controllers
             }
 
             var kilometersCard = await _context.KilometersCards
-                .Include(k=>k.Trips)
+                .Include(k=>k.Trips).ThenInclude(t=>t.Project)
                 .Include(k=>k.Car)
                 .FirstOrDefaultAsync(m => m.CardId == id);
+
             if (kilometersCard == null)
             {
                 return NotFound();
