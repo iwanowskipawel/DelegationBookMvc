@@ -78,6 +78,8 @@ namespace DelegationBook.Controllers
             ViewData["Projects"] = new SelectList(await projects.ToListAsync(), nameof(Project.ProjectId), nameof(Project.Symbol));
             ViewData["KilometerCards"] = new SelectList(await kilometerCards.ToListAsync(), nameof(KilometersCard.CardId), nameof(KilometersCard.CardSymbol));
 
+            Trip trip = new Trip();
+
             return View();
         }
 
@@ -87,13 +89,14 @@ namespace DelegationBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("TripId,DepartureDate,ArrivalDate,Keeper,Driver,Project,Destination,InitialMeter,FinalMeter")] Trip trip)
+            [Bind("TripId,DepartureDate,ArrivalDate,Destination,Project,KilometersCard,Keeper,Driver,InitialMeter,FinalMeter")] Trip trip)
         {
             if (ModelState.IsValid)
             {
                 trip.Keeper = await _context.Employees.FindAsync(trip.Keeper.EmployeeId);
                 trip.Driver = await _context.Employees.FindAsync(trip.Driver.EmployeeId);
                 trip.Project = await _context.Projects.FindAsync(trip.Project.ProjectId);
+                trip.KilometersCard = await _context.KilometersCards.FindAsync(trip.KilometersCard.CardId);
 
                 _context.Trips.Add(trip);
                 await _context.SaveChangesAsync();
