@@ -4,7 +4,7 @@
     ViewData["Title"] = "Szczegóły";
 }
 
-<h2>Sczegóły</h2>
+<h2>Szczegóły</h2>
 
 <div>
     <h4>Wyjazd</h4>
@@ -20,7 +20,7 @@
             @Html.DisplayNameFor(model => model.Project)
         </dt>
         <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Project.Symbol)
+            @Html.ActionLink(@Model.Project.Symbol, "Details", "Projects", new { @id = $"{@Model.Project.ProjectId}" })
         </dd>
         <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.DepartureDate)
@@ -56,19 +56,20 @@
             @Html.DisplayNameFor(model => model.Keeper)
         </dt>
         <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Keeper.FullName)
+            @Html.ActionLink(@Model.Keeper.FullName, "Details", "Employees", new { @id = $"{@Model.Keeper.EmployeeId}" })
         </dd>
         <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.Driver)
         </dt>
         <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Driver.FullName)
+            @Html.ActionLink(@Model.Driver.FullName, "Details", "Employees", new { @id = $"{@Model.Driver.EmployeeId}" })
         </dd>
         <dt class="col-sm-3">
             @Html.DisplayNameFor(model => model.KilometersCard.Car)
         </dt>
         <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.KilometersCard.Car.Model) - @Html.DisplayFor(model => model.KilometersCard.Car.RegistrationNumber)
+            @Html.ActionLink($"{@Model.KilometersCard.Car.Model} - {@Model.KilometersCard.Car.RegistrationNumber}",
+           "Details", "Employees", new { @id = $"{@Model.KilometersCard.Car.CarId}" })
         </dd>
 
     </dl>
