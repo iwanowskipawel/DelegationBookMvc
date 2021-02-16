@@ -32,12 +32,15 @@ namespace DelegationBook.Models
         public string Destination { get; set; }
 
         [Display(Name = "Początkowy stan licznika")]
+        [DisplayFormat(DataFormatString = "{0:N0} km")]
         public int InitialMeter { get; set; }
 
         [Display(Name = "Końcowy stan licznika")]
+        [DisplayFormat(DataFormatString = "{0:N0} km")]
         public int FinalMeter { get; set; }
 
         [Display(Name = "Dystans")]
+        [DisplayFormat(DataFormatString = "{0:N0} km")]
         public int Distance => FinalMeter - InitialMeter;
 
         [Display(Name = "Karta kilometrów")]
