@@ -41,3 +41,7 @@
     <a asp-action="Delete" asp-route-id="@Model.CardId">Usuń</a> |
     <a asp-action="Index">Powrót do listy</a>
 </div>
+
+<br />
+<h5>Wyjazdy w ramach karty</h5>
+@await Html.PartialAsync("../Shared/_ListTripsPartial.cshtml", Model.Trips)
