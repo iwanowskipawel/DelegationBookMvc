@@ -35,7 +35,7 @@ namespace DelegationBook.Models
         public Employee Keeper { get; set; }
 
         [Display(Name = "Miejsce docelowe")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Nazwa miejsca docelowego musi mieć maksymalnie 50 znaków ale nie mniej niż 3")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Nazwa miejsca docelowego może mieć maksymalnie 50 znaków ale nie mniej niż 3")]
         [Required(ErrorMessage = "Pole obowiązkowe")]
         public string Destination { get; set; }
 

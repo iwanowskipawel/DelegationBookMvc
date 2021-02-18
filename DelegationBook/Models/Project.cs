@@ -22,8 +22,8 @@ namespace DelegationBook.Models
         public Company Company { get; set; }
 
         [Display(Name = "Tytuł")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage ="Tytuł tematu musi mieć maksymalnie 100 znaków ale nie mniej niż 3")]
-        [RegularExpression(@"^[A-Z].*", ErrorMessage ="Tytuł poiwnien rozpoczynać się wielką literą")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage ="Tytuł tematu może mieć maksymalnie 100 znaków ale nie mniej niż 3")]
+        [RegularExpression(@"^[A-Z].*", ErrorMessage ="Tytuł musi rozpoczynać się wielką literą")]
         [Required(ErrorMessage = "Pole obowiązkowe")]
         public string Title { get; set; }
 
