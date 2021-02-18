@@ -50,6 +50,12 @@ namespace DelegationBook.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
+            var companies = _context.Companies
+                .OrderBy(c => c.CompanyId)
+                .Select(c => new SelectListItem(c.Name, c.CompanyId.ToString()));
+
+            ViewData["Companies"] = new SelectList(companies, "Value", "Text");
+
             return View();
         }
 
