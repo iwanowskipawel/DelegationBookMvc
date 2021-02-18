@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,6 +8,7 @@ namespace DelegationBook.Models
     public class Project
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int ProjectId { get; set; }
 
         [Display(Name = "Symbol")]

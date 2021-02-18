@@ -5,6 +5,7 @@ namespace DelegationBook.Models
     public class Address
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int AddressId { get; set; }
 
         [Display(Name = "Ulica")]

@@ -5,6 +5,7 @@ namespace DelegationBook.Models
     public class Company
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int CompanyId { get; set; }
 
         [Display(Name = "Nazwa")]

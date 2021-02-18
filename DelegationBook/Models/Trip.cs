@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace DelegationBook.Models
     public class Trip
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int TripId { get; set; }
 
         [Display(Name = "Data wyjazdu")]
@@ -24,15 +26,12 @@ namespace DelegationBook.Models
         public DateTime ArrivalDate { get; set; }
 
         [Display(Name = "Kierowca")]
-        [Required(ErrorMessage = "Pole obowiązkowe")]
         public Employee Driver { get; set; }
 
         [Display(Name = "Temat")]
-        [Required(ErrorMessage = "Pole obowiązkowe")]
         public Project Project { get; set; }
 
         [Display(Name = "Dysponent")]
-        [Required(ErrorMessage = "Pole obowiązkowe")]
         public Employee Keeper { get; set; }
 
         [Display(Name = "Miejsce docelowe")]

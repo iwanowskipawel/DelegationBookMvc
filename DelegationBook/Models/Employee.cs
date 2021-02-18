@@ -7,6 +7,7 @@ namespace DelegationBook.Models
     public class Employee : Person
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int EmployeeId { get; set; }
 
         [Display(Name = "Stanowisko")]

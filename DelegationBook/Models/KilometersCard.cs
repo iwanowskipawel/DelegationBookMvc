@@ -7,6 +7,7 @@ namespace DelegationBook.Models
     public class KilometersCard
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int CardId { get; set; }
 
         [Display(Name = "Nr karty")]

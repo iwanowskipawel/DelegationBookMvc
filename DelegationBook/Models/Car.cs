@@ -6,6 +6,7 @@ namespace DelegationBook.Models
     public class Car
     {
         [Key]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public int CarId { get; set; }
 
         [Display(Name = "Model")]
