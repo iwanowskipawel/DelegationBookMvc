@@ -4,14 +4,16 @@ using DelegationBook.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DelegationBook.Migrations
 {
     [DbContext(typeof(DelegationBookContext))]
-    partial class DelegationBookContextModelSnapshot : ModelSnapshot
+    [Migration("20210218085830_EmployeeUpdate")]
+    partial class EmployeeUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

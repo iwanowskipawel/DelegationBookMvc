@@ -13,6 +13,7 @@ namespace DelegationBook.Models
 
         [Display(Name = "Symbol")]
         [RegularExpression(@"\d{1}-\d{4}-\d{2}-\d{1}-\d{2}", ErrorMessage ="Symbol tematu musi być w formacie 0-0000-00-0-00")]
+        [StringLength(14)]
         [Required(ErrorMessage ="Pole obowiązkowe")]
         public string Symbol { get; set; }
 
