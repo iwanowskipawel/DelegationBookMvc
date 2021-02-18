@@ -11,12 +11,16 @@ namespace DelegationBook.Models
         public int CardId { get; set; }
 
         [Display(Name = "Nr karty")]
+        [StringLength(10, ErrorMessage = "Numer karty nie może być dłuższy niż 10 znaków")]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public string CardSymbol { get; set; }
 
         [Display(Name = "Samochód")]
         public Car Car { get; set; }
 
         [Display(Name = "Karta pracy pojazdu")]
+        [StringLength(10, ErrorMessage = "Numer karty nie może być dłuższy niż 10 znaków")]
+        [Required(ErrorMessage = "Pole obowiązkowe")]
         public string WorkCardNumber { get; set; }
 
         [Display(Name = "Wyjazdy")]
